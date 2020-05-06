@@ -1,0 +1,129 @@
+- id: '1588013078914'
+  name: Sonja's standje
+  entities:
+    light.lamp_boven_eettafel:
+      brightness: 149
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lamp boven eettafel
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
+    light.lamp_links_naast_de_bank:
+      brightness: 249
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lamp links naast de bank
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
+    light.lamp_rechts_naast_de_bank:
+      brightness: 249
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lamp rechts naast de bank
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
+    light.lichtstrip_in_kast:
+      brightness: 249
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lichtstrip in kast
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
+    light.luchtstrip_achter_de_tv:
+      brightness: 149
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Luchtstrip achter de TV
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
+    light.schemerlamp_bij_de_boekenkast:
+      brightness: 249
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Schemerlamp bij de boekenkast
+      hs_color:
+      - 36.706
+      - 66.667
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 189
+      - 84
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.502
+      - 0.416
