@@ -104,6 +104,12 @@ sensor:
   state_topic: "zigbee2mqtt/bridge/state"
   icon: mdi:router-wireless
 
+- platform: mqtt
+  name: Hassio operating temperature
+  state_topic: "homeassistant/host/core/temp"
+  unit_of_measurement: '°C'
+  icon: mdi:coolant-temperature
+
 binary_sensor:
   - platform: workday
     country: SE
