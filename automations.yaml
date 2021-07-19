@@ -1,0 +1,140 @@
+- id: '0000201'
+  alias: Standkachel aanzetten
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition:
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: weather.home
+      value_template: '{{ state_attr(''weather.home'', ''temperature'') }}'
+      below: -0.1
+    - condition: zone
+      entity_id: device_tracker.volvo_emb292
+      zone: zone.home
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id:
+      - switch.emb292_heater
+  - service: mqtt.publish
+    data:
+      payload_template: '{{ states.switch.emb292_heater.state }}'
+      topic: car/yv1bw738dg1374085/heater
+- id: '0000401'
+  alias: Enable Zigbee joining
+  trigger:
+    platform: state
+    entity_id: input_boolean.zigbee_permit_join
+    to: 'on'
+  action:
+  - service: mqtt.publish
+    data:
+      topic: zigbee2mqtt/bridge/config/permit_join
+      payload: 'true'
+  - service: timer.start
+    data:
+      entity_id: timer.zigbee_permit_join
+- id: '0000402'
+  alias: Disable Zigbee joining
+  trigger:
+  - entity_id: input_boolean.zigbee_permit_join
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      payload: 'false'
+      topic: zigbee2mqtt/bridge/config/permit_join
+    service: mqtt.publish
+  - data:
+      entity_id: timer.zigbee_permit_join
+    service: timer.cancel
+- id: '0000403'
+  alias: Disable Zigbee joining by timer
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.zigbee_permit_join
+  action:
+  - service: mqtt.publish
+    data:
+      topic: zigbee2mqtt/bridge/config/permit_join
+      payload: 'false'
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.zigbee_permit_join
+- id: '0000501'
+  alias: Turn Bureaulamp on when motion is detected
+  description: Turn Bureaulamp on when motion is detected
+  trigger:
+  - device_id: b7952d85e7004cab8484bc551b40117b
+    domain: binary_sensor
+    entity_id: binary_sensor.0xec1bbdfffe9edfe2_occupancy
+    platform: device
+    type: motion
+  condition:
+  - after: '21:00:00'
+    before: 06:00:00
+    condition: time
+  action:
+  - brightness_pct: 6
+    device_id: 4af3f133cc8c4906b1773326d9bae503
+    domain: light
+    entity_id: light.bureaulamp
+    type: turn_on
+- id: '0000502'
+  alias: Turn Bureaulamp off when no motion is detected
+  description: Turn Bureaulamp off when no motion is detected
+  trigger:
+  - device_id: b7952d85e7004cab8484bc551b40117b
+    domain: binary_sensor
+    entity_id: binary_sensor.0xec1bbdfffe9edfe2_occupancy
+    platform: device
+    type: no_motion
+  condition: []
+  action:
+  - brightness_pct: 25
+    device_id: 4af3f133cc8c4906b1773326d9bae503
+    domain: light
+    entity_id: light.bureaulamp
+    type: turn_off
+- id: '0000511'
+  alias: Turn Sonos on when motion is detected
+  description: Turn Sonos on when motion is detected
+  trigger:
+  - device_id: b7952d85e7004cab8484bc551b40117b
+    domain: binary_sensor
+    entity_id: binary_sensor.0xec1bbdfffe9edfe2_occupancy
+    platform: device
+    type: motion
+  condition: []
+  action:
+  - entity_id: media_player.kantoor
+    service: media_player.turn_on
+  - data:
+      entity_id: media_player.kantoor
+      source: Rag'n'Bone Man Radio
+    service: media_player.select_source
+- id: '0000512'
+  alias: Turn Sonos off when motion is stopped detected
+  description: Turn Sonos off when motion is stopped detected
+  trigger:
+  - device_id: b7952d85e7004cab8484bc551b40117b
+    domain: binary_sensor
+    entity_id: binary_sensor.0xec1bbdfffe9edfe2_occupancy
+    platform: device
+    type: no_motion
+  condition: []
+  action:
+  - data: {}
+    entity_id: media_player.kantoor
+    service: media_player.media_stop
